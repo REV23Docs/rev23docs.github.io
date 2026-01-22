@@ -1,132 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>REV23 Docs</title>
- 	<meta name="Description" content="Documentation of REV23 software and services for tattoo & body piercing studios."/>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REV23 Docs - Tattoo & Piercing Studio Software Documentation</title>
+  <meta name="description" content="Official documentation for REV23 software. Guides, tutorials, and references for tattoo and body piercing studio management software.">
+  <meta name="keywords" content="REV23, tattoo software, piercing software, tattoo studio management, body piercing studio, release forms, consent forms, tattoo shop software">
+  <meta name="author" content="REV23">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://docs.rev23.com/">
+  <meta name="theme-color" content="#1a1a2e">
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-       <a class="navbar-brand" href="https://www.rev23.com">REV23</a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">			  
-		   	<li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                	Docs
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <a class="dropdown-item" href="https://docs.rev23.com/rev23-desktop-docs/">REV23 Desktop</a>
-                </div>
-             </li>
-			  
-		   	 <li class="nav-item">
-                <a class="nav-link" href="https://www.rev23.com/support/">Support</a>
-             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="https://www.rev23.com/blog/">Blog</a>
-             </li>
-          </ul>
-       </div>
-    </nav>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docs.rev23.com/">
+  <meta property="og:title" content="REV23 Docs - Tattoo & Piercing Studio Software">
+  <meta property="og:description" content="Official documentation for REV23 software. Guides, tutorials, and references for tattoo and body piercing studio management.">
+  <meta property="og:site_name" content="REV23 Docs">
 
-    <div class="jumbotron jumbotron-fluid text-center">
-       <h1 class="display-4">REV23 Docs</h1>
-       <div class="container">
-       <p class="lead">Documentation of REV23 software and services for tattoo &amp; body piercing studios.</p>
-       <hr class="my-4">
-       <p>Welcome to the new REV23 Docs site, the home for our documentation and user guides. Expand your knowledge of REV23 software and services to get the most out of products in your tattoo &amp; body piercing studio.</p>
-       <p class="lead">
-         <a class="btn btn-primary btn-lg mb-2" href="https://docs.rev23.com/rev23-cloudapp-docs" role="button">REV23 Cloud (iPad/Web) Docs</a>
-          <a class="btn btn-primary btn-lg mb-2" href="https://docs.rev23.com/rev23-desktop-docs" role="button">REV23 Desktop (Windows) Docs</a>
-       </p>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="REV23 Docs - Tattoo & Piercing Studio Software">
+  <meta name="twitter:description" content="Official documentation for REV23 software. Guides, tutorials, and references for tattoo and body piercing studio management.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "REV23 Docs",
+    "url": "https://docs.rev23.com/",
+    "description": "Official documentation for REV23 tattoo and body piercing studio management software",
+    "publisher": {
+      "@type": "Organization",
+      "name": "REV23",
+      "url": "https://www.rev23.com",
+      "sameAs": [
+        "https://www.instagram.com/rev23dev",
+        "https://www.facebook.com/rev23dev",
+        "https://www.youtube.com/rev23dev",
+        "https://github.com/REV23Docs"
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: #1a1a2e;
+      background: #ffffff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #1a1a2e;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #1a1a2e;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #1a1a2e;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: #1a1a2e;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2d2d44;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1a1a2e;
+      border: 2px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      border-color: #1a1a2e;
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* Products Section */
+    .products {
+      padding: 8rem 2rem;
+      background: #ffffff;
+    }
+
+    .products-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 5rem;
+    }
+
+    .products-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .products-header p {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 24px;
+      padding: 3rem;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-card.cloud {
+      background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
+    }
+
+    .product-card.desktop {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .product-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .cloud .product-label .dot {
+      background: #6366f1;
+    }
+
+    .desktop .product-label .dot {
+      background: #64748b;
+    }
+
+    .product-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .product-card > p {
+      color: #475569;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .product-features {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .cloud .feature-icon {
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    .desktop .feature-icon {
+      background: rgba(100, 116, 139, 0.15);
+    }
+
+    .feature-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-content p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .cloud .product-cta {
+      background: #4f46e5;
+      color: white;
+    }
+
+    .cloud .product-cta:hover {
+      background: #4338ca;
+    }
+
+    .desktop .product-cta {
+      background: #475569;
+      color: white;
+    }
+
+    .desktop .product-cta:hover {
+      background: #334155;
+    }
+
+    .product-cta svg {
+      transition: transform 0.2s;
+    }
+
+    .product-cta:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Resources Section */
+    .resources {
+      padding: 8rem 2rem;
+      background: #f8fafc;
+    }
+
+    .resources-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .resources-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .resources-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .resources-header p {
+      color: #64748b;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .resource-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .resource-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .resource-card p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .resource-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .resource-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #475569;
+      font-weight: 500;
+      transition: gap 0.2s;
+    }
+
+    .resource-links a:hover {
+      gap: 0.75rem;
+      color: #1e293b;
+    }
+
+    .resource-links a::before {
+      content: '→';
+    }
+
+    /* Footer */
+    .footer {
+      padding: 4rem 2rem;
+      background: #1a1a2e;
+      color: white;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 800px) {
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-brand p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      color: #94a3b8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-col a {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a2e;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 700px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="https://www.rev23.com" class="nav-brand">REV23</a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="https://docs.rev23.com/rev23-cloudapp-docs/">Cloud Docs</a></li>
+        <li><a href="https://docs.rev23.com/rev23-desktop-docs/">Desktop Docs</a></li>
+        <li><a href="https://www.rev23.com/support/">Support</a></li>
+        <li><a href="https://www.rev23.com/blog/">Blog</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Documentation</span>
+      <h1>Everything you need to run your studio</h1>
+      <p>Guides, tutorials, and references for REV23 software. Built specifically for tattoo and body piercing professionals.</p>
+      <div class="hero-buttons">
+        <a href="https://docs.rev23.com/rev23-cloudapp-docs/" class="btn btn-primary">
+          Cloud Docs
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://docs.rev23.com/rev23-desktop-docs/" class="btn btn-secondary">
+          Desktop Docs
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
-    <div class="container">
-       <div class="row text-center">
-          <div class="col-lg-6 offset-lg-3">Explore popular topics from our docs.</div>
-       </div>
-       <br>
-       <hr>
-       <br>
-       <div class="row">
-          <div class="col-md-4" style="margin-bottom: 10px">
-             <div class="card">
-                <img class="card-img-top" src="images/rev23-desktop-quick-start.png" alt="REV23 Desktop Quick Start">
-                <div class="card-body">
-                   <h4 class="card-title">REV23 Desktop (Windows) Quick Start</h4>
-                   <p class="card-text">The best place to get started with REV23 Desktop. Follow Harley Quinn, Poison Ivy and Catwoman as they open Gotham City Tattoo &amp; Piercing and start using REV23 Desktop.</p>
-                   <br><br>
-                   <a href="https://docs.rev23.com/rev23-desktop-docs/quick-start/" class="btn btn-primary">Get Started</a>
-                </div>
-             </div>
-          </div>
-          <div class="col-md-4" style="margin-bottom: 10px">
-             <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Cloud Calendar (Windows) Troubleshooting</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Get help with syncing your device.</h6>
-                  <p class="card-text">Having trouble with Cloud Calendar? Device not syncing? Check out this topic.</p>
-					<a href="https://docs.rev23.com/rev23-desktop-docs/troubleshooting/cloud-calendar/" class="card-link">Troubleshooting: Cloud Calendar</a>
-                </div>
-             </div>
-             <br>
-             <br/>
-             <div class="card">
-                <div class="card-header">
-                   Need to install hardware?
-                </div>
-                <ul class="list-group list-group-flush">
-					<li class="list-group-item"><a href="https://docs.rev23.com/rev23-desktop-docs/hardware/signature-pad/">Signature Pad</a></li>
-                   <li class="list-group-item"><a href="https://docs.rev23.com/rev23-desktop-docs/hardware/bar-code-reader/">Bar code Reader</a></li>
-                   <li class="list-group-item"><a href="https://docs.rev23.com/rev23-desktop-docs/hardware/receipt-printer/">Receipt Printer</a></li>
-                </ul>
-             </div>
-          </div>
-          <div class="col-md-4" style="margin-bottom: 10px">
-             <div class="card">
-                <img class="card-img-top" src="images/rev23-backups.jpg" alt="REV23 Database Backup">
-                <div class="card-body">
-                  <h5 class="card-title">Set up automatic backups</h5>
-                  <p class="card-text">Ensure that you don't lose data during a hard drive crash! Set up automatic backups to an external hard drive today!</p>
-                </div>
-                <div class="card-body">
-                   <a href="https://docs.rev23.com/rev23-desktop-docs/how-to/automate-backups/" class="card-link">How To: Automate Backups</a>
-					<br /><br />
-			   	   <a href="https://www.rev23.com/blog/2018/03/30/backup-your-backup-a-guide-to-healthy-database-backups/" class="card-link">Blog: Backup your backup. A guide to healthy database backups.</a>
-                </div>
-             </div>
-          </div>
-       </div>
-       <br/>
-       <br/>
-       <div class="row">
-          <div class=" col-md-6">Want to contribute to our docs or be notified when we make changes? Follow our REV23 Docs repository on <a href="https://github.com/REV23Docs">GitHub.</a></div>
-          <div class="col-md-6">Find an issue in our docs or want to send us feedback? Submit a report in the repository.</div>
-       </div>
-       <br/>
-       <br/>
-       <hr>
-       <div class="row">
-          <div class="text-center col-lg-6 offset-lg-3">
-             <h4>REV23 Docs</h4>
-             <p>Copyright &copy; 2025 &middot; All Rights Reserved &middot; <a href="https://www.rev23.com" >REV23</a></p>
-          </div>
-       </div>
+    <div class="scroll-indicator">
+      <span>Explore</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-    <script src="js/jquery-3.2.1.min.js"></script>
+  </section>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed --> 
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.0.0.js"></script>
-  </body>
+  <section class="products">
+    <div class="products-header">
+      <h2>Choose your platform</h2>
+      <p>REV23 Cloud and REV23 Desktop are separate applications, each with their own documentation.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card cloud">
+        <div class="product-label">
+          <span class="dot"></span>
+          iPad &amp; Web
+        </div>
+        <h3>REV23 Cloud</h3>
+        <p>Our modern platform. Digital release forms, customer management, and service tracking from any device with a browser.</p>
+        <div class="product-features">
+          <a href="https://docs.rev23.com/rev23-cloudapp-docs/overview/" class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div class="feature-content">
+              <h4>Getting Started</h4>
+              <p>Setup basics through your first release form</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-cloudapp-docs/concepts/kiosk/" class="feature-item">
+            <div class="feature-icon">✍️</div>
+            <div class="feature-content">
+              <h4>Kiosk Mode</h4>
+              <p>Hand your iPad to customers to fill out forms</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-cloudapp-docs/template-designer/" class="feature-item">
+            <div class="feature-icon">📄</div>
+            <div class="feature-content">
+              <h4>Template Designer</h4>
+              <p>Build custom release forms and documents</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-cloudapp-docs/api/overview/" class="feature-item">
+            <div class="feature-icon">🔌</div>
+            <div class="feature-content">
+              <h4>API &amp; Webhooks</h4>
+              <p>Integrate REV23 with other tools</p>
+            </div>
+          </a>
+        </div>
+        <a href="https://docs.rev23.com/rev23-cloudapp-docs/" class="product-cta">
+          View Cloud Documentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="product-card desktop">
+        <div class="product-label">
+          <span class="dot"></span>
+          Windows
+        </div>
+        <h3>REV23 Desktop</h3>
+        <p>Full-featured Windows software with scheduling, inventory, credit card processing, advanced reporting, and hardware support.</p>
+        <div class="product-features">
+          <a href="https://docs.rev23.com/rev23-desktop-docs/quick-start/" class="feature-item">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-content">
+              <h4>Quick Start Tutorial</h4>
+              <p>Learn by opening Gotham City Tattoo &amp; Piercing</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-desktop-docs/how-to/automate-backups/" class="feature-item">
+            <div class="feature-icon">💾</div>
+            <div class="feature-content">
+              <h4>Database Backups</h4>
+              <p>Protect your data with automatic backups</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-desktop-docs/hardware/signature-pad/" class="feature-item">
+            <div class="feature-icon">🖊️</div>
+            <div class="feature-content">
+              <h4>Hardware Setup</h4>
+              <p>Signature pads, printers, barcode readers</p>
+            </div>
+          </a>
+          <a href="https://docs.rev23.com/rev23-desktop-docs/concepts/cloud-calendar/" class="feature-item">
+            <div class="feature-icon">📅</div>
+            <div class="feature-content">
+              <h4>Cloud Calendar</h4>
+              <p>Sync appointments to your phone or tablet</p>
+            </div>
+          </a>
+        </div>
+        <a href="https://docs.rev23.com/rev23-desktop-docs/" class="product-cta">
+          View Desktop Documentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources">
+    <div class="resources-inner">
+      <div class="resources-header">
+        <div class="product-label" style="margin-bottom: 1rem;"><span class="dot" style="background: #64748b;"></span>Windows</div>
+        <h2>Desktop Resources</h2>
+        <p>Common guides for REV23 Desktop users</p>
+      </div>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <h3>Desktop Installation</h3>
+          <p>Set up REV23 Desktop on your main PC or add additional workstations.</p>
+          <div class="resource-links">
+            <a href="https://docs.rev23.com/rev23-desktop-docs/installation/main-pc/">Main PC Setup</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/installation/add-on-pc/">Add-On PC</a>
+          </div>
+        </div>
+        <div class="resource-card">
+          <h3>Hardware Guides</h3>
+          <p>Connect signature pads, receipt printers, and other peripherals.</p>
+          <div class="resource-links">
+            <a href="https://docs.rev23.com/rev23-desktop-docs/hardware/signature-pad/">Signature Pad</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/hardware/receipt-printer/">Receipt Printer</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/hardware/bar-code-reader/">Barcode Reader</a>
+          </div>
+        </div>
+        <div class="resource-card">
+          <h3>Data Protection</h3>
+          <p>Keep your studio data safe with proper backup practices.</p>
+          <div class="resource-links">
+            <a href="https://docs.rev23.com/rev23-desktop-docs/how-to/automate-backups/">Automate Backups</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/how-to/restore-your-database/">Restore Database</a>
+            <a href="https://www.rev23.com/blog/2018/03/30/backup-your-backup-a-guide-to-healthy-database-backups/">Backup Best Practices (Blog)</a>
+          </div>
+        </div>
+        <div class="resource-card">
+          <h3>Troubleshooting</h3>
+          <p>Solutions for common issues with REV23 Desktop.</p>
+          <div class="resource-links">
+            <a href="https://docs.rev23.com/rev23-desktop-docs/troubleshooting/general/">General Issues</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/troubleshooting/cloud-calendar/">Cloud Calendar Sync</a>
+            <a href="https://docs.rev23.com/rev23-desktop-docs/troubleshooting/hardware/">Hardware Problems</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.rev23.com" class="nav-brand">REV23</a>
+        <p>Software built for tattoo and body piercing studios since 2012.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="https://docs.rev23.com/rev23-cloudapp-docs/">Cloud Docs</a></li>
+          <li><a href="https://docs.rev23.com/rev23-desktop-docs/">Desktop Docs</a></li>
+          <li><a href="https://github.com/REV23Docs">Contribute on GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="https://www.rev23.com">REV23.com</a></li>
+          <li><a href="https://www.rev23.com/support/">Support</a></li>
+          <li><a href="https://www.rev23.com/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://youtube.com/rev23dev">YouTube</a></li>
+          <li><a href="https://instagram.com/rev23dev">Instagram</a></li>
+          <li><a href="https://facebook.com/rev23dev">Facebook</a></li>
+          <li><a href="mailto:support@rev23.com">support@rev23.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 REV23. All rights reserved.
+    </div>
+  </footer>
+</body>
 </html>
