@@ -1,0 +1,484 @@
+/*!
+ * REV23 Strata v1.0.0 — the design language
+ *
+ * Skin is built in layers, and so is this. (stratum corneum · spinosum · basale)
+ *
+ * Framework-agnostic. Plain CSS custom properties and utility classes.
+ * Works in Next.js, ASP.NET Razor, plain HTML, anything.
+ * No Tailwind, no build step, no dependencies.
+ *
+ * This file is the CORE plus the Cloud expression (weather conditions).
+ * Non-Cloud surfaces should use the core and skip the weather section.
+ *
+ * Usage:  <link rel="stylesheet" href="strata.css">
+ * Spec:   ./README.md
+ */
+
+:root {
+  /* ---------------------------------------------------------------
+     GROUND & SURFACES
+     Cool-tinted near-white. Never pure white as the page ground —
+     the tint is what ties the neutrals to "Cloud".
+     --------------------------------------------------------------- */
+  --st-canvas: #f6f9fd;    /* page ground */
+  --st-canvas-2: #edf3fa;  /* recessed wells, inset panels, alternating bands */
+  --st-surface: #ffffff;   /* raised cards, stages, sheets */
+
+  /* ---------------------------------------------------------------
+     INK — three levels, no more
+     --------------------------------------------------------------- */
+  --st-ink: #0f1826;       /* headings, primary text */
+  --st-ink-2: #4a5a70;     /* body copy */
+  --st-ink-3: #5b6e85;     /* labels, meta, captions, placeholders */
+
+  /* ---------------------------------------------------------------
+     HAIRLINES — separation, never containment
+     --------------------------------------------------------------- */
+  --st-hair: #e1e9f2;
+  --st-hair-2: #edf2f8;
+
+  /* ---------------------------------------------------------------
+     BRAND — the gradient's two stops
+     --------------------------------------------------------------- */
+  --st-brand: #3498db;         /* REV23 brand blue — links, icon strokes, accents (calm identity) */
+  --st-brand-strong: #2471a3;  /* deeper — solid button fills only, so white text clears AA */
+  --st-brand-lt: #3b82f6;  /* gradient start — the softer, classic Cloud address blue */
+  --st-brand-cy: #06b6d4;  /* gradient end — cyan */
+  --st-gradient: linear-gradient(100deg, var(--st-brand-lt), var(--st-brand-cy));
+
+  /* ---------------------------------------------------------------
+     IDENTITY — fixed logo/app-icon treatments, not general UI colour
+     --------------------------------------------------------------- */
+  --st-identity-auth-primary: #167bb0; /* higher-chroma Auth0 primary action; pair with white */
+  --st-identity-dark-canvas: #09111f;
+  --st-identity-dark-ink: #eef3f8;
+  --st-identity-dark-ink-2: #aebed0;
+  --st-identity-dark-brand-lt: #4f8ff9;
+  --st-identity-dark-brand-cy: #1cc4df;
+  --st-identity-dark-gradient: linear-gradient(100deg, var(--st-identity-dark-brand-lt), var(--st-identity-dark-brand-cy));
+  --st-identity-dark-mark-opacity: .92;
+  --st-icon-light-bg-from: #f7fafd;
+  --st-icon-light-bg-to: #dde6f1;
+  --st-icon-light-bg: linear-gradient(145deg, var(--st-icon-light-bg-from), var(--st-icon-light-bg-to));
+
+  /* ---------------------------------------------------------------
+     SEMANTIC — meaning only. Never decoration.
+     --------------------------------------------------------------- */
+  --st-ok: #059669;     /* ember family — deeper, hotter, with voltage */
+  --st-warn: #f97316;
+  --st-danger: #dc2626;
+
+  /* ---------------------------------------------------------------
+     ELEVATION — three tiers. Depth reports layering.
+     --------------------------------------------------------------- */
+  --st-e1: 0 1px 2px rgba(15, 24, 38, .10), 0 1px 1px rgba(15, 24, 38, .06);
+  --st-e2: 0 2px 4px rgba(15, 24, 38, .13), 0 8px 16px rgba(15, 24, 38, .08);
+  --st-e3: 0 4px 10px rgba(15, 24, 38, .16), 0 16px 30px rgba(15, 24, 38, .11);
+
+  /* ---------------------------------------------------------------
+     RADIUS — generous. Fluent 2 / iOS territory.
+     --------------------------------------------------------------- */
+  --st-r-sm: 8px;
+  --st-r-md: 12px;
+  --st-r-lg: 17px;
+  --st-r-xl: 22px;
+  --st-r-pill: 999px;
+
+  /* ---------------------------------------------------------------
+     TYPE
+     Display face: Jost 300/400 — headlines only, never body or UI.
+     Body/UI: Source Sans 3. Data/labels: Geist Mono.
+     Consumers may map --st-font-* to their own loaded families.
+     --------------------------------------------------------------- */
+  --st-font-display: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  --st-font-sans: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --st-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Display sizes. Never set display type below --st-t-sm: light weights
+     get fragile and fail contrast at small sizes. */
+  --st-t-hero: clamp(2.4rem, 5.4vw, 4rem);
+  --st-t-lg: clamp(1.9rem, 3.8vw, 2.7rem);
+  --st-t-md: 1.45rem;
+  --st-t-sm: 1.05rem;
+}
+
+/* =================================================================
+   CLOUD — the sky expression  (cloud.rev23.com and Cloud surfaces)
+
+   Core is Silicon-Valley-meets-punk: hard, defiant, grounded. Cloud
+   lays a lighter, airier sky OVER the core — it softens the hardness
+   and adds the weather. Apply to the ROOT of a Cloud surface:
+       <body class="st-root st-cloud">
+   Cloud also owns gradient use in UI (the studio's address, the act of
+   claiming). Official identity artwork retains its fixed 23 treatment.
+   Non-Cloud UI (Desktop, account, SSO) runs pure core — calm brand blue,
+   no gradient decoration, no sky.
+   ================================================================= */
+.st-cloud {
+  /* softer, airier elevation — Cloud floats where core sits hard */
+  --st-e1: 0 1px 2px rgba(15, 24, 38, .05), 0 1px 1px rgba(15, 24, 38, .03);
+  --st-e2: 0 2px 6px rgba(15, 24, 38, .06), 0 6px 18px rgba(15, 24, 38, .05);
+  --st-e3: 0 8px 28px rgba(15, 24, 38, .09), 0 2px 8px rgba(15, 24, 38, .05);
+}
+
+/* --- CONDITIONS ---------------------------------------------------
+   Within a Cloud surface, a section may declare a condition, which
+   remaps the ground and ink tokens. Apply to a section wrapper:
+       <section class="st-overcast"> ... </section>
+   A CLOSED SET of four. Don't invent a fifth. If a section doesn't fit
+   one of these, it's Clear.
+   ================================================================= */
+
+/* --- Overcast: weight and gravity ---------------------------------
+   For surfaces carrying consequence — security, data protection,
+   legal, compliance, anything where the reader should slow down. */
+.st-overcast {
+  --st-canvas: #e8eef6;
+  --st-canvas-2: #dde6f1;
+  --st-surface: #f7fafd;
+  --st-ink: #0d1622;
+  --st-ink-2: #40506b;
+  --st-ink-3: #52657c;
+  --st-hair: #cdd9e7;
+  --st-hair-2: #dbe4ef;
+  color: var(--st-ink-2);
+}
+
+.st-overcast:not(nav) { background: var(--st-canvas); }
+
+/* --- Afterglow: warm light in the sky ------------------------------
+   THE MODEL — surfaces are the clouds and stay neutral; the sky behind
+   them is where colour lives. Recolouring the ground makes a section
+   read as "a beige band" and loses the metaphor. This washes the
+   atmosphere and leaves canvas, surfaces and ink untouched.
+
+   For the human register: care, healing, aftercare, reviews.
+
+   Edge-anchored and near the threshold of perception. If you can point
+   at where it starts, it is too strong. */
+.st-afterglow:not(nav) {
+  position: relative;
+  isolation: isolate;
+}
+
+.st-afterglow:not(nav)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 100% at 0% 50%, rgba(236, 108, 154, .085), transparent 70%),
+    radial-gradient(70% 100% at 100% 50%, rgba(244, 143, 106, .075), transparent 70%);
+}
+
+/* --- Storm: weight and drama --------------------------------------
+   Not "Night but darker". Night is the app's calm working surface;
+   Storm is a public moment meant to land — a launch band, a closing
+   statement, the one place the page raises its voice.
+
+   Deep saturated blue-black rather than neutral grey, higher
+   contrast, and the gradient allowed to behave atmospherically —
+   this is the ONE place it may exceed rule 5, because here the
+   gradient IS the weather rather than a label.
+
+   HARD LIMIT: one Storm per page. It stops working the moment
+   there are two. */
+.st-storm {
+  --st-canvas: #070b14;
+  --st-canvas-2: #0b1220;
+  --st-surface: #111a2c;
+  --st-ink: #ffffff;
+  --st-ink-2: #b6c6dc;
+  --st-ink-3: #7286a3;
+  --st-hair: #1e2b42;
+  --st-hair-2: #162034;
+  --st-e1: none;
+  --st-e2: none;
+  --st-e3: none;
+  color: var(--st-ink-2);
+}
+
+/* Structural properties are scoped away from nav elements on purpose.
+   `position: relative` on a fixed navbar overrides its positioning and
+   drops it out of the viewport — a weather class must be safe to apply
+   to the nav so it can wear the condition it is currently over. */
+.st-storm:not(nav) {
+  position: relative;
+  isolation: isolate;
+  background: var(--st-canvas);
+}
+
+/* Atmosphere — permitted here and nowhere else. This is not a glow
+   blob giving glass something to refract; it is the condition. */
+.st-storm:not(nav)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(30, 144, 255, .32), transparent 60%),
+    radial-gradient(100% 90% at 92% 100%, rgba(0, 229, 255, .24), transparent 62%);
+  pointer-events: none;
+}
+
+.st-storm .st-card { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .10); }
+.st-storm .st-card:hover { background: rgba(255, 255, 255, .08); }
+.st-storm .st-well { background: rgba(0, 0, 0, .25); }
+.st-storm .st-acrylic { background: color-mix(in srgb, #070b14 68%, transparent); }
+.st-storm .st-acrylic-strong {
+  background: color-mix(in srgb, #111a2c 62%, transparent);
+  border-color: rgba(255, 255, 255, .12);
+}
+.st-storm .st-btn-quiet { background: rgba(255, 255, 255, .08); color: var(--st-ink); }
+.st-storm .st-grad-text {
+  /* brighter stops — the base gradient loses legibility on deep ground */
+  background: linear-gradient(100deg, #7daeff, #4fe3f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =================================================================
+   BASE
+   ================================================================= */
+.st-root,
+body.st-root {
+  background: var(--st-canvas);
+  color: var(--st-ink-2);
+  font-family: var(--st-font-sans);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =================================================================
+   TYPE
+   ================================================================= */
+.st-display {
+  font-family: var(--st-font-display);
+  font-weight: 300;
+  letter-spacing: -.014em;
+  line-height: 1.1;
+  color: var(--st-ink);
+  text-wrap: balance;
+}
+
+/* 400 for smaller headings — 300 gets fragile below ~1.4rem */
+.st-display-md {
+  font-family: var(--st-font-display);
+  font-weight: 400;
+  letter-spacing: -.016em;
+  line-height: 1.15;
+  color: var(--st-ink);
+}
+
+.st-hero { font-size: var(--st-t-hero); }
+.st-h2   { font-size: var(--st-t-lg); }
+.st-h3   { font-size: var(--st-t-md); }
+
+/* Section kicker. Jost, tight tracking — NOT mono, wide-tracked, tiny: that
+   treatment is the AI-generated tell we refuse. The 1.05rem display floor
+   (rule 4) targets FRAGILE LIGHT weights; a 500-weight cap is not fragile,
+   so the eyebrow is the one sanctioned display use below the floor. */
+.st-eyebrow {
+  font-family: var(--st-font-display);
+  font-weight: 500;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--st-ink-3);
+}
+
+.st-lede { font-size: 1.06rem; color: var(--st-ink-2); line-height: 1.68; }
+.st-body { font-size: .93rem; color: var(--st-ink-2); }
+.st-meta { font-family: var(--st-font-mono); font-size: .665rem; color: var(--st-ink-3); }
+
+/* All numerals that line up in columns */
+.st-num { font-family: var(--st-font-mono); font-variant-numeric: tabular-nums; }
+
+/* =================================================================
+   ELEVATION
+   ================================================================= */
+.st-e1 { box-shadow: var(--st-e1); }
+.st-e2 { box-shadow: var(--st-e2); }
+.st-e3 { box-shadow: var(--st-e3); }
+
+/* =================================================================
+   ACRYLIC
+   ONLY where content genuinely passes beneath: sticky nav, sheets,
+   overlays, dropdowns. Never on a static card. If nothing scrolls
+   under it, use a solid surface.
+   ================================================================= */
+.st-acrylic {
+  background: color-mix(in srgb, var(--st-canvas) 72%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.st-acrylic-strong {
+  background: color-mix(in srgb, #fff 64%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  border: 1px solid rgba(255, 255, 255, .92);
+}
+
+/* Compositing hint — prevents backdrop-filter artifacts on fixed elements */
+.st-acrylic,
+.st-acrylic-strong {
+  will-change: background-color;
+  transform: translateZ(0);
+}
+
+/* =================================================================
+   THE GRADIENT
+   One meaning: the studio's cloud address, and the act of claiming
+   it. Not for headlines, section backgrounds, or general emphasis.
+   ================================================================= */
+.st-grad-text {
+  background: var(--st-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.st-grad-bg { background: var(--st-gradient); color: #fff; }
+.st-grad-bg:hover { filter: saturate(1.12) brightness(1.05); }
+
+/* 2px structural rule — mirrors the app's section headers */
+.st-grad-rule { height: 2px; border: 0; background: var(--st-gradient); }
+
+/* =================================================================
+   SURFACES
+   ================================================================= */
+.st-card {
+  background: var(--st-surface);
+  border: 0;
+  border-radius: var(--st-r-lg);
+  box-shadow: var(--st-e2);
+}
+.st-card:hover { box-shadow: var(--st-e3); }
+
+/* Recessed well — for insets inside a card, not for page sections */
+.st-well {
+  background: var(--st-canvas-2);
+  border-radius: var(--st-r-md);
+}
+
+/* Alternating page band */
+.st-band {
+  background: var(--st-surface);
+  border-top: 1px solid var(--st-hair);
+  border-bottom: 1px solid var(--st-hair);
+}
+
+/* =================================================================
+   CONTROLS
+   ================================================================= */
+.st-btn {
+  font-family: var(--st-font-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  padding: 9px 18px;
+  border-radius: var(--st-r-md);
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter .16s, box-shadow .16s, background .16s;
+}
+
+/* Primary = the claim action. Carries the gradient. */
+.st-btn-primary { background: var(--st-gradient); color: #fff; box-shadow: var(--st-e1); }
+.st-btn-primary:hover { filter: saturate(1.12) brightness(1.05); box-shadow: var(--st-e2); }
+
+/* Secondary = everything else. Flat brand. */
+.st-btn-secondary { background: var(--st-brand-strong); color: #fff; }
+.st-btn-secondary:hover { background: #1f5c85; }
+
+.st-btn-quiet { background: var(--st-surface); color: var(--st-ink-2); box-shadow: var(--st-e1); }
+.st-btn-quiet:hover { color: var(--st-ink); box-shadow: var(--st-e2); }
+
+.st-btn:disabled { opacity: .55; cursor: not-allowed; filter: none; }
+
+.st-field {
+  background: var(--st-surface);
+  border: 1px solid var(--st-hair);
+  border-radius: var(--st-r-md);
+  padding: 11px 14px;
+  font-family: var(--st-font-sans);
+  font-size: .93rem;
+  color: var(--st-ink);
+  box-shadow: var(--st-e1);
+  transition: border-color .16s, box-shadow .16s;
+}
+.st-field::placeholder { color: var(--st-ink-3); }
+.st-field:focus {
+  outline: 0;
+  border-color: var(--st-brand-lt);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, .18);
+}
+
+/* =================================================================
+   STATUS — semantic colour only
+   ================================================================= */
+.st-chip {
+  font-family: var(--st-font-sans);
+  font-weight: 600;
+  font-size: .66rem;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  border-radius: var(--st-r-pill);
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.st-chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.st-chip-ok     { color: var(--st-ok);     background: color-mix(in srgb, var(--st-ok) 12%, transparent); }
+.st-chip-warn   { color: var(--st-warn);   background: color-mix(in srgb, var(--st-warn) 12%, transparent); }
+.st-chip-danger { color: var(--st-danger); background: color-mix(in srgb, var(--st-danger) 12%, transparent); }
+.st-chip-info   { color: var(--st-brand);  background: color-mix(in srgb, var(--st-brand) 12%, transparent); }
+
+/* =================================================================
+   CATEGORY MARKS  (rule 7)
+   The craft reference — the tattoo half made concrete. Fine linework,
+   single ink, given scale. Fill is --st-ink so weather remaps them for
+   free (white under Storm — no second asset). Wayfinding, not badges.
+
+   Inline the sprite (marks/strata-marks.svg) once per page, then:
+     <svg class="st-mark"><use href="#mark-tattoo"/></svg>
+   ================================================================= */
+.st-mark {
+  width: 2.7rem;   /* rule 7 scale: ~2.5–3rem */
+  height: 2.7rem;
+  fill: var(--st-ink);
+  flex: none;
+}
+.st-mark-lg   { width: 4rem; height: 4rem; }
+.st-mark-hero { width: clamp(6rem, 14vw, 12rem); height: auto; }  /* one loud mark, Storm-style — a moment, not a texture */
+
+/* =================================================================
+   ACCESSIBILITY
+   ================================================================= */
+.st-root :focus-visible,
+:root:has(.st-root) :focus-visible {
+  outline: 2px solid var(--st-brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: rgba(52, 152, 219, .22); color: var(--st-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
